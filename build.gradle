@@ -2,10 +2,27 @@ plugins {
     id "java"
 }
 
-group = "com.ges.meisser"
+var mainPackage = "com.ges.meisser"
+
+group = mainPackage
 version = "0.0.1a"
 
 var authors = "GES[C1cDez, Sniper_Alex, DioxinCF3, kamisama]"
+
+
+tasks.register("client", {
+    jar.manifest.attributes(
+            "Main-Class": "${mainPackage}.ClientMain"
+    )
+    archivesBaseName = "${rootProject.name}Client"
+})
+
+tasks.register("server", {
+    jar.manifest.attributes(
+            "Main-Class": "${mainPackage}.ServerMain"
+    )
+    archivesBaseName = "${rootProject.name}Server"
+})
 
 
 repositories {
@@ -19,7 +36,6 @@ dependencies {
 
 jar {
     manifest.attributes(
-            "Main-Class": "com.ges.meisser.Main",
             "Created-By": authors
     )
 }
